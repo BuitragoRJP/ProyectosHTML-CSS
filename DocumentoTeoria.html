@@ -1,0 +1,798 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HTML y CSS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+	/* Paint a complete callout box on every PDF page fragment. */
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><article id="3e8c7c15-d2cd-8025-b667-ee16a095313b" class="page sans"><header><h1 class="page-title" dir="auto">HTML y CSS</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h2 id="3e8c7c15-d2cd-8081-95b6-d89918a8ef9c" class="" dir="auto">HTML</h2><h3 id="3e8c7c15-d2cd-8035-846a-e3a4fe25fda1" class="" dir="auto">Estructura HTML</h3><p id="3e8c7c15-d2cd-80aa-97e5-e1e53f93abfa" class="" dir="auto">&lt;head&gt; Es la etiqueta que indica el bloque o conjunto de cosas que se deben cargar primero en la pagina&lt;/head&gt;</p><p id="3e8c7c15-d2cd-8045-a8cb-d287ce13c623" class="" dir="auto">&lt;meta nos sirve para especificaciones de la web (escala de la web o codificación de caracteres UTF-8)&gt; (Dentro del contenido de head)</p><p id="3e8c7c15-d2cd-80aa-bae2-d452e87d0100" class="" dir="auto">&lt;body&gt;  Contiene todo el cuerpo o maquetado de la web &lt;/body&gt;</p><p id="3e8c7c15-d2cd-803d-bb04-f656b0069b62" class="" dir="auto">&lt;title&gt;Es únicamente para el titulo de la web&lt;/title&gt;</p><p id="3e8c7c15-d2cd-80a0-a472-ec42f9f63c73" class="" dir="auto">&lt;html&gt;Etiqueta global&lt;/html&gt;</p><h4 id="3e8c7c15-d2cd-801d-9d54-eb78b5f62deb" class="" dir="auto">Tipos de etiquetas</h4><p id="3e8c7c15-d2cd-8006-acd0-e514121227d8" class="" dir="auto">Autocontenidas: &lt;meta name&gt; nos especifica el nombre de la etiqueta, no tiene cierre y los atributos de la etiquetan están dentro de la misma etiqueta.</p><p id="3e8c7c15-d2cd-802c-b2f4-e2852b5b7cde" class="" dir="auto">Contenedoras: &lt;body&gt;Tienen una apertura y un cierre, conteniendo en este espacio lo que se &lt;/body&gt;. Así mismo las etiquetas contenedoras también tiene que poner sus atributos en la etiqueta de apertura.</p><h4 id="3e8c7c15-d2cd-8078-afb1-dbdbad1ad35a" class="" dir="auto">Etiquetas </h4><p id="3e8c7c15-d2cd-80d2-a553-ccf07e015303" class="" dir="auto">&lt;h1→h6&gt; Son títulos de texto del 1 al 6 cada número especifica un tamaño de letra en decremento desde el 1 al 6  siendo el 6 el titulo más pequeño &lt;/h1→h6&gt;</p><p id="3e8c7c15-d2cd-80c9-b404-f30d472031dc" class="" dir="auto">&lt;p&gt; Párrafo de texto principal &lt;/p&gt;</p><p id="3e8c7c15-d2cd-8059-bd55-c0f16fda21aa" class="" dir="auto">&lt;span&gt; texto secundario no reconocido como párrafo principal, puede estar contenido en la etiqueta &lt;p&gt; &lt;/span&gt;</p><p id="3e8c7c15-d2cd-80c0-a12d-fd4924c0254c" class="" dir="auto">&lt;ol&gt; estructura para una lista ordenada &lt;li&gt;etiqueta para cada punto de la lista&lt;/li&gt; cada punto estará numerado &lt;/ol&gt;</p><p id="3e8c7c15-d2cd-80a8-83f8-d608305edd8c" class="" dir="auto">&lt;ul&gt;estructura para una lista no ordenada &lt;li&gt;etiqueta para cada punto de la lista&lt;/li&gt; cada punto tendrá una viñeta o punto&lt;/ul&gt;</p><p id="3e8c7c15-d2cd-80b7-a7b2-d5463ede605e" class="" dir="auto">&lt;!—  —&gt; Esta es la etiqueta para comentarios.</p><p id="3e8c7c15-d2cd-802a-b787-dc7615c5f1f1" class="" dir="auto">&lt;a target = “_blank” href=”URL A OTRA DIRECCIÓN”&gt; esta etiqueta es para  redireccionamiento url, el atributo href es para contener la url de direccionamiento el atributo. El atributo target blank nos permite que la url se abra en una nueva pestaña &lt;/a&gt; la diferencia en etiquetas a son la absolutas las cuales son urls externas a nuestro programa y las relativas son rutas de nuestra misma web o proyecto</p><p id="3e8c7c15-d2cd-8060-99a8-cbfd9f9496ea" class="" dir="auto">&lt;img src=”ruta de la imagen (url web o ruta de archivo)” width=”define el ancho de la imagen” alt=”Texto en caso de que la imagen no cargue en la web”&gt;  </p><p id="3e8c7c15-d2cd-807b-9d26-eae4a2348aa7" class="" dir="auto">&lt;form&gt;etiqueta general para formularios&lt;/form&gt;</p><p id="3e8c7c15-d2cd-80bd-b260-f758b9d646ac" class="" dir="auto">&lt;label&gt;Etiqueta usada para dar la el nombre o descripción de un input&lt;/label&gt;</p><p id="3e8c7c15-d2cd-80f2-bda7-e31f596f6201" class="" dir="auto">&lt;input type=”define el tipod e variable de entrar” placeholder=”espacio de texto en forma de ejemplo para la entrada de datos.”&gt;</p><h2 id="3e8c7c15-d2cd-8089-8c79-f52ff0d007d8" class="" dir="auto">CSS</h2><p id="3e8c7c15-d2cd-80de-aabd-d4a7030e2a53" class="" dir="auto">Para indicar el stilo css existen 3 formas, forma lineal en donde se pone el atributo style en la etiqueta que queremos cambias, forma interna usamos la etiqueta style para poner los estilos indicando la etiqueta que queremos asignarle el estilo y forma externa contralando en un archivo externo.</p><p id="3eac7c15-d2cd-8075-ad85-d9e179c98614" class="" dir="auto">Fuente:</p><details id="3eac7c15-d2cd-8018-8bc3-e585711041c5" open="" class="toggle" dir="auto"><summary>Propiedades de texto</summary><div class="indented"><ul id="3eac7c15-d2cd-806f-84a6-fe75f588f0b4" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Color, es para cambiar el color de texto.<ul id="3eac7c15-d2cd-8026-a2f3-d80612e53de2" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: [color: #FFF] [color rgb o rgba (255,255,255,0-1 opacidad)] </li></ul></li></ul><ul id="3eac7c15-d2cd-80a6-8db6-c3f9a344c978" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Font-family, asignar el tipo de letra para la web.<ul id="3eac7c15-d2cd-8004-beff-ccb68bf7813e" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo:  font-family: se asigna un tipo de letra principal y seguido de comas los que deberian estar disponibles en caso de que el navegador no soporte el tipo de letra.</li></ul></li></ul><ul id="3eac7c15-d2cd-80a1-9b3e-c99e5ab4f4b3" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Font-size, tamaño de la letra espesificado en pixeles.<ul id="3eac7c15-d2cd-8087-818f-f63ce0ef2229" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: font-size: 16px</li></ul></li></ul><ul id="3eac7c15-d2cd-80f6-af39-e94483fd27f7" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Font-weight, grosor de la negrita <ul id="3eac7c15-d2cd-8046-80dc-db022b8e880d" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: font-weight: bold (o usar porcentajes de negrita)</li></ul></li></ul><ul id="3eac7c15-d2cd-801f-b27c-fb3fa757f653" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Line-height: espaciado entre líneas de parrafos<ul id="3eac7c15-d2cd-8033-9ee1-d0ff7cb4bbef" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: line-height: “cantidad de espacio entre líneas de texto, 2”</li></ul></li></ul><ul id="3edc7c15-d2cd-80cc-8568-ce75ec055fb0" class="bulleted-list" dir="auto"><li style="list-style-type:disc">letter-spacing: espaciado entre letras<ul id="3edc7c15-d2cd-8065-93a7-f092f779afcd" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: letter-spacing: “cantidad de espacio en px 10px”</li></ul></li></ul><ul id="3edc7c15-d2cd-808c-afa3-fcc6369d84b5" class="bulleted-list" dir="auto"><li style="list-style-type:disc">text-aling: lineamiento del texto.<ul id="3edc7c15-d2cd-80f4-b0fe-f694b47e9e73" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: tiene 7 alineaciónes pero por ejemplo center es para centrar y justify para justificar el texto.</li></ul></li></ul></div></details><details id="3edc7c15-d2cd-80ea-8000-d49759e94393" open="" class="toggle" dir="auto"><summary>Formateo de pagina</summary><div class="indented"><ul id="3edc7c15-d2cd-80f7-8262-c9a73ef75de6" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Para cambiar propiedades del HTML a nivel general debemos encerar las propiedades dentro de <strong><span style="border-bottom:0.05em solid">*{”porpiedades generales”},</span></strong> normalmente al formatear una pagina se manda el padding, el margin y el box-sizing a 0. quitando estas 3 capas.</li></ul><ul id="3edc7c15-d2cd-8072-bf01-e9d471ba540a" class="bulleted-list" dir="auto"><li style="list-style-type:disc">padding: el espació entre el contenedor y su contenido (es como un relleno para empujar el contenido hacia dentro)</li></ul><ul id="3edc7c15-d2cd-8049-844e-c8b2d010726a" class="bulleted-list" dir="auto"><li style="list-style-type:disc">margin: es el espació entre los contenedores especificado en px</li></ul></div></details><details id="3edc7c15-d2cd-805a-9dea-d11029acbd13" open="" class="toggle" dir="auto"><summary>Propiedades de contenedores</summary><div class="indented"><ul id="3edc7c15-d2cd-80cf-b195-f7cae6916ffa" class="bulleted-list" dir="auto"><li style="list-style-type:disc">border-radius: darle curvatura a las esquinas de un contenedor<ul id="3edc7c15-d2cd-8080-af08-da4563f4187e" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: border-radius: 10px 10px 10px 10px</li></ul></li></ul><ul id="3edc7c15-d2cd-80dd-94b6-efc43c146a04" class="bulleted-list" dir="auto"><li style="list-style-type:disc">border: asignarle un color, estilo de borde y grosor en px<ul id="3edc7c15-d2cd-8057-858b-da0585e99365" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: border: red 2px dashed</li></ul></li></ul><ul id="3edc7c15-d2cd-8045-8ef6-e62ecf031e9a" class="bulleted-list" dir="auto"><li style="list-style-type:disc">backgraund-color: darle color al fondo de un contenedor</li></ul><h4 id="3edc7c15-d2cd-8082-8abf-d3cd2555d8f8" class="" dir="auto">Organización de contenido</h4><ul id="3edc7c15-d2cd-8073-b036-fa8a2e419bf9" class="bulleted-list" dir="auto"><li style="list-style-type:disc">display: flex: propiedad para entender en que sentido se mostrará el diseño de la pagina.</li></ul><ul id="3edc7c15-d2cd-8075-8e12-ebf0934bef88" class="bulleted-list" dir="auto"><li style="list-style-type:disc">flex-direction: especifica la dirección de la flexibilidad del contenido</li></ul><ul id="3edc7c15-d2cd-8011-99e0-fa73c85cdaf9" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Gap: espaciado entre contenedores (”separación”)</li></ul><ul id="3edc7c15-d2cd-803e-9dfe-cd2b68b6c818" class="bulleted-list" dir="auto"><li style="list-style-type:disc">aling-items: especificar ubicación del contenido de arriba a abajo</li></ul><ul id="3edc7c15-d2cd-8088-86e6-eff6eabb8ede" class="bulleted-list" dir="auto"><li style="list-style-type:disc">justify-content: especificar ubicación del contenido de izquierda a derecha</li></ul><ul id="3edc7c15-d2cd-8057-8b91-d2976e755e00" class="bulleted-list" dir="auto"><li style="list-style-type:disc">position: relative: esta propiedad permite liberar el contenido del contenedor.</li></ul><ul id="3edc7c15-d2cd-807b-9859-e4803d200181" class="bulleted-list" dir="auto"><li style="list-style-type:disc">position: absolute: para usar la posision absoluta en un hijo debe existir un padre relativo, con esto podemos lograr que el hijo se adapte al tamaño cambiante del padre.</li></ul><ul id="3edc7c15-d2cd-8049-98f7-e4e6659e7dd9" class="bulleted-list" dir="auto"><li style="list-style-type:disc">flex-warp: si el contenido no entra en una row pasará el contenido a la siguiente row.</li></ul><h4 id="3edc7c15-d2cd-8085-88e0-cc631141c4af" class="" dir="auto">Maquetado web</h4><ul id="3edc7c15-d2cd-8007-a332-dbc955bea353" class="bulleted-list" dir="auto"><li style="list-style-type:disc">display: grid: red de organización donde dividiremos el espació de la pagina web.</li></ul><ul id="3edc7c15-d2cd-8085-b0b3-fe42ce3dd110" class="bulleted-list" dir="auto"><li style="list-style-type:disc">grid-template-areas: aqui se espesifica la estructura que tendran las areas asignadas en las clases usando el las etiquedas asignadas con grid-area.<ul id="3edc7c15-d2cd-80df-9f3b-e94995b90d7e" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: “Header Header Header”</li></ul><ul id="3edc7c15-d2cd-8090-9012-f2e1b9dad723" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: “Nav Main Slidebar”</li></ul><ul id="3edc7c15-d2cd-808a-a734-f184d7f49a62" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: ”Footer Footer Footer”</li></ul></li></ul><ul id="3edc7c15-d2cd-8051-84a8-e9151a105a04" class="bulleted-list" dir="auto"><li style="list-style-type:disc">grid-area: “etiqueta para identificar el area”</li></ul><ul id="3edc7c15-d2cd-8037-9866-fdb29972bb88" class="bulleted-list" dir="auto"><li style="list-style-type:disc">grid-template-rows: especificamos el tamaño de cada fila.<ul id="3edc7c15-d2cd-80e1-a97b-c18c3d42f418" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: grid-template-rows: 80px 1fr 80px</li></ul><ul id="3edc7c15-d2cd-8014-8fd7-cc66caefd586" class="bulleted-list" dir="auto"><li style="list-style-type:circle">En este ejemplo estamos especificando que la primera fila ocupará 80px de la pagina, la segunda fila ocupara todo el espacio sobrante de la pagina y que la tercera fila ocuará 80px de la pagina.</li></ul></li></ul><ul id="3edc7c15-d2cd-802e-b376-f6c686c517e3" class="bulleted-list" dir="auto"><li style="list-style-type:disc">grid-template-colums: sirve exactamente para lo mismo que grid-template-rows pero para las columnas.</li></ul></div></details><details id="3edc7c15-d2cd-8074-971a-c984cd022d92" open="" class="toggle" dir="auto"><summary>Estados</summary><div class="indented"><ul id="3edc7c15-d2cd-8049-83de-e0922ffd0d39" class="bulleted-list" dir="auto"><li style="list-style-type:disc">&amp;: para empezar a usar un estado tenemos que definirlo con “&amp;:”</li></ul><ul id="3edc7c15-d2cd-80aa-ba3d-de92f42ac138" class="bulleted-list" dir="auto"><li style="list-style-type:disc">&amp;:hover: este es el estado cuando el mouse esta encima del contendedor donde se defina. y accionará las propiedades que se definan dentro del estado.</li></ul><ul id="3edc7c15-d2cd-8089-beeb-db3c247e8419" class="bulleted-list" dir="auto"><li style="list-style-type:disc">&amp;:active: este estado es cuando se le da click al contenedor accionando las propiedades cuando se cliquee el contenedor.</li></ul></div></details><details id="3edc7c15-d2cd-8015-8b1a-e1a3e598da42" open="" class="toggle" dir="auto"><summary>Diseño responsive</summary><div class="indented"><ul id="3edc7c15-d2cd-80f4-a94d-dce5a2786dac" class="bulleted-list" dir="auto"><li style="list-style-type:disc">@media (”se debe definir el tamaño”){ dentro definimos las propiedades del contenedor cuando la pagina tenga este tamaño }</li></ul><ul id="3edc7c15-d2cd-8075-a97a-f0ef3db44e36" class="bulleted-list" dir="auto"><li style="list-style-type:disc">(min/max)-width: es para definir el tamaño de para @media min significa que apartir de ese tamaño o más y max significa que usará ese media hasta que llegue al tamaño indicado.<ul id="3edc7c15-d2cd-8030-9194-f3b4a2ae6baf" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: @media(min-width: 576px) esto nos indica que usará las propiedades cuando el tamaño del dispositivo o el navegador lleguen a 576px</li></ul><ul id="3edc7c15-d2cd-8031-8d1f-f83766f79fbc" class="bulleted-list" dir="auto"><li style="list-style-type:circle">Ejemplo: @media(max-width: 575px) esto nos indica que estará usando las propiedades hasta que el tamaño del dispositivo o el navegador lleguen a 575px</li></ul></li></ul></div></details><details id="3edc7c15-d2cd-80f0-9ef8-cacb6705d7d2" open="" class="toggle" dir="auto"><summary>Animación</summary><div class="indented"><p id="3edc7c15-d2cd-809b-b4c8-ecb79f246f76" class="" dir="auto">Cuando tenemos un estado de cambio podemos darle un suavizado o tiempo de ejecución con transition.</p><ul id="3edc7c15-d2cd-802d-8332-f5707c2123e9" class="bulleted-list" dir="auto"><li style="list-style-type:disc">transition: especificamos la transición o para todas poner all, el tiempo de ejecución y la forma de la transición <a href="http://cubic-bezier.com/">cubic-bezier.com/</a> (URL para generar tiempos de movimiento es la forma enq ue se va a mover la transición en un hover) ejemplo: transition: “transiciones afectadas” “tiempo efectivo” “tipo de transición (cubic-bezier(0,-1.88,1,1.78))” </li></ul><ul id="3edc7c15-d2cd-803b-8bd3-f60569ca8ab6" class="bulleted-list" dir="auto"><li style="list-style-type:disc">transition-delay: permite definir un tiempo de espera previa a una transición</li></ul><p id="3edc7c15-d2cd-80cf-8b33-f3b98e566457" class="" dir="auto">la estructura de animaciones es @keyframes “nombre de la animación” y dentro de {pondremos los porcentajes donde estaran los cambios de transición}<br/></p><ul id="3edc7c15-d2cd-80be-8420-d4ddfc21ddd8" class="bulleted-list" dir="auto"><li style="list-style-type:disc">animation: “nombre de la animación” duración de la animación infinite, esto es para definir que objeto o contenedor realizara la animación creada.</li></ul><ul id="3edc7c15-d2cd-80c9-b300-cb83991dc3a4" class="bulleted-list" dir="auto"><li style="list-style-type:disc">0 - 100%: podremos usar estos porcentajes para especificar el comportamiento de la animación.</li></ul><ul id="3edc7c15-d2cd-80a7-8cd8-f5baea250777" class="bulleted-list" dir="auto"><li style="list-style-type:disc">movimiento: left, right, top, bottom especificado en pixeles el movimiento de la animación.</li></ul><ul id="3edc7c15-d2cd-8056-8d7a-c6f43cef8abe" class="bulleted-list" dir="auto"><li style="list-style-type:disc">rotación: transform: rotate(0deg - 360deg) el objeto rotará.</li></ul><ul id="3edc7c15-d2cd-80d1-9be1-fb188ad68190" class="bulleted-list" dir="auto"><li style="list-style-type:disc"></li></ul></div></details><p id="3e9c7c15-d2cd-8063-8642-d95cd77adfbb" class="" dir="auto">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
